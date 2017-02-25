@@ -31,7 +31,7 @@ class DiffCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-	    $argument = 'diff --ignore-all-space --ignore-blank-lines';
+	    $argument = 'diff --color --ignore-all-space --ignore-blank-lines';
 	    $this->exec($argument, $input, $output);
     }
 }
