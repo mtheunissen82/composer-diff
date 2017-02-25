@@ -38,20 +38,20 @@ class BaseCommand extends Command
 		$from = $input->getArgument('sha-from');
 		$to = $input->getArgument('sha-to');
 
-		$fileArg = escapeshellarg("$from:composer.lock");
+		$fileArg = escapeshellarg("$from:./composer.lock");
 		$lockFrom = trim(`git show $fileArg`);
 		if(!$lockFrom) {
 			throw new \LogicException("composer.lock can't be found in $from");
 		}
 
 		if($to) {
-			$fileArg = escapeshellarg("$to:composer.lock");
+			$fileArg = escapeshellarg("$to:./composer.lock");
 			$lockTo = trim(`git show $fileArg`);
 			if(!$lockTo) {
 				throw new \LogicException("composer.lock can't be found in $to");
 			}
 		} else {
-			$fileArg = escapeshellarg("$from:composer.lock");
+			$fileArg = escapeshellarg("$from:./composer.lock");
 			if(file_exists("composer.lock")) {
 				$lockTo = trim(file_get_contents("composer.lock"));
 				if(!$lockTo) {
