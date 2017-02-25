@@ -14,9 +14,9 @@ class BaseCommand extends Command
 	 */
 	protected function packagePaths()
 	{
-		$raw = trim(`composer show -i --path`);
+		$raw = trim(`composer show --path`);
 		if (!$raw) {
-			throw new \LogicException("'composer show -i --path' returned nothing");
+			throw new \LogicException("'composer show --path' returned nothing");
 		}
 
 		$output = array();
@@ -33,7 +33,7 @@ class BaseCommand extends Command
 	/**
 	 * Return an array with lockFrom, lockTo, and rangeArg
 	 */
-	protected function getGitArguments(InputInterface $input, OutputInterface $output) 
+	protected function getGitArguments(InputInterface $input, OutputInterface $output)
 	{
 		$from = $input->getArgument('sha-from');
 		$to = $input->getArgument('sha-to');
@@ -69,7 +69,7 @@ class BaseCommand extends Command
 			$rangeArg = escapeshellarg("$from..$to");
 		} else {
 			$rangeArg = escapeshellarg("$from");
-		}	
+		}
 
 		return array($lockFrom, $lockTo, $rangeArg);
 	}
@@ -113,7 +113,6 @@ class BaseCommand extends Command
 
 		$reposFrom = $this->reposFromLockfile($lockFrom);
 		$reposTo = $this->reposFromLockfile($lockTo);
-
 		$packagePaths = $this->packagePaths();
 
 		foreach ($reposTo as $package => $info) {
